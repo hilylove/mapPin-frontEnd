@@ -87,6 +87,7 @@ function App() {
         onDblClick={handleAddClick}
         transitionDuration="200"
       >
+        {console.log(process.env.REACT_APP_MAPBOX)}
         {pins.map((p) => (
           <>
             <Marker
