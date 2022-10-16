@@ -22,8 +22,8 @@ function App() {
   const [viewport, setViewport] = useState({
     width: "100vw",
     height: "100vh",
-    latitude: 47.040182,
-    longitude: 17.071727,
+    latitude: 43.4516,
+    longitude: -80.4925,
     zoom: 4,
   });
 
