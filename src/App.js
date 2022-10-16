@@ -52,10 +52,7 @@ function App() {
     };
 
     try {
-      const res = await axios.post(
-        "https://map-pin-backend.herokuapp.com/api/pins",
-        newPin
-      );
+      const res = await axios.post("/pins", newPin);
       setPins([...pins, res.data]);
       setNewPlace(null);
     } catch (err) {
@@ -66,9 +63,7 @@ function App() {
   useEffect(() => {
     const getPins = async () => {
       try {
-        const allPins = await axios.get(
-          "https://map-pin-backend.herokuapp.com/api/pins"
-        );
+        const allPins = await axios.get("/pins");
         setPins(allPins.data);
       } catch (err) {
         console.log(err);
