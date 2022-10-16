@@ -27,18 +27,6 @@ function App() {
     zoom: 4,
   });
 
-  useEffect(() => {
-    const getPins = async () => {
-      try {
-        const res = await axios.get("/pins");
-        setPins(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getPins();
-  }, []);
-
   const handleMarkerClick = (id, lat, long) => {
     setCurrentPlaceId(id);
     setViewport({ ...viewport, latitude: lat, longitude: long });
@@ -71,6 +59,18 @@ function App() {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    const getPins = async () => {
+      try {
+        const allPins = await axios.get("/pins");
+        setPins(allPins.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getPins();
+  }, []);
 
   const handleLogout = () => {
     myStorage.removeItem("user");
