@@ -30,9 +30,7 @@ function App() {
   useEffect(() => {
     const getPins = async () => {
       try {
-        const res = await axios.get(
-          "https://map-pin-backend.herokuapp.com/api/pins"
-        );
+        const res = await axios.get("/pins");
         setPins(res.data);
       } catch (err) {
         console.log(err);
@@ -66,10 +64,7 @@ function App() {
     };
 
     try {
-      const res = await axios.post(
-        "https://map-pin-backend.herokuapp.com/api/pins",
-        newPin
-      );
+      const res = await axios.post("/pins", newPin);
       setPins([...pins, res.data]);
       setNewPlace(null);
     } catch (err) {
@@ -93,25 +88,22 @@ function App() {
         transitionDuration="200"
       >
         {pins.map((p) => (
-          <>
-            <div key={p.title}>
-              <Marker
-                latitude={p.lat}
-                longitude={p.long}
-                offsetLeft={-viewport.zoom * 3.5}
-                offsetTop={-viewport.zoom * 7}
-              >
-                <Room
-                  style={{
-                    fontSize: viewport.zoom * 7,
-                    color: p.username === currentUser ? "tomato" : "slateblue",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => handleMarkerClick(p._id, p.lat, p.long)}
-                />
-              </Marker>
-            </div>
-
+          <div key={p._id}>
+            <Marker
+              latitude={p.lat}
+              longitude={p.long}
+              offsetLeft={-viewport.zoom * 3.5}
+              offsetTop={-viewport.zoom * 7}
+            >
+              <Room
+                style={{
+                  fontSize: viewport.zoom * 7,
+                  color: p.username === currentUser ? "tomato" : "slateblue",
+                  cursor: "pointer",
+                }}
+                onClick={() => handleMarkerClick(p._id, p.lat, p.long)}
+              />
+            </Marker>
             {p._id === currentPlaceId && (
               <Popup
                 latitude={p.lat}
@@ -138,7 +130,7 @@ function App() {
                 </div>
               </Popup>
             )}
-          </>
+          </div>
         ))}
         {newPlace && (
           <Popup

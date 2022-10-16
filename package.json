@@ -43,5 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://map-pin-backend.herokuapp.com/api"
+  "proxy": "http://localhost:3000/api"
 }
